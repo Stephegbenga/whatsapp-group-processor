@@ -126,15 +126,21 @@ def webhook():
             order_detail = text
 
             unknown_text = "Please resend the order details with the transaction type e.g(w.t.b)"
-            if type == "unknown" and text != unknown_text:
+            saved_text  = "Order saved to database"
+
+            ignore_list = [saved_text, unknown_text]
+            if type == "unknown" and text not in ignore_list:
                 sendmessage(req, unknown_text)
                 return {'success': False}
 
             # Insert into database
             if insert_sale(type, order_detail):
                 print(f"Stored order - Type: {type}, Detail: {order_detail}")
+                sendmessage(req, saved_text)
             else:
                 print("Failed to store order in database")
+
+            sendmessage(req, saved_text)
 
         return {'success': True, 'message': 'received and stored'}
 
