@@ -37,11 +37,7 @@ def updatewebhook():
     headers = {'Content-Type': 'application/json', 'x-maytapi-key': product_token}
 
     response = requests.request("POST", url, headers=headers, data=payload).json()
-    if response['success']:
-        response = {"status": "success", "message": "webhook updated"}
-    else:
-        response = {"status": "error", "message": response['message']}
-    return response
+    print(response)
 
 
 def sendmessage(phone_payload, text):
@@ -200,5 +196,6 @@ def log_all_sales():
 if __name__ == '__main__':
     # Initialize database before starting the Flask app
     init_database()
+    updatewebhook()
     # Example usage
     app.run()
