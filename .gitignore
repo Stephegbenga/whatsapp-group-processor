@@ -1,0 +1,10 @@
+test
+config.py
+__pycache__
+*.pyc
+.idea
+*__pycache__
+.aws
+.env
+venv
+update_note.txt
